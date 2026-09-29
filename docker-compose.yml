@@ -15,5 +15,24 @@ services:
     volumes:
       - techstock_postgres_data:/var/lib/postgresql/data
 
+
+
+  backend:
+    build:
+      context: ./backend
+
+    container_name: techstock-backend
+
+    ports:
+      - "8080:8080"
+
+    depends_on:
+      - db
+
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/techstock
+      SPRING_DATASOURCE_USERNAME: giovana
+      SPRING_DATASOURCE_PASSWORD: giovana123
+
 volumes:
   techstock_postgres_data:
