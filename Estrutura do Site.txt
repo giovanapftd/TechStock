@@ -1,0 +1,10 @@
+TechStock
+|
+|___ backend
+|       |___ Java + Spring Boot (Cadastro, Listagem, Edição, Exclusão e Controle de Quantidade dos PRODUTOS)
+|        
+|___ frontend
+|       |___ React + JavaScript + CSS
+|
+|___ docker
+        |___ Junção do BACKEND e do FRONTEND

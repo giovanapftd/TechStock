@@ -1,0 +1,19 @@
+services:
+
+  db:
+    image: postgres:17
+    container_name: techstock-db   # Nome do CONTAINER
+
+    environment:
+      POSTGRES_DB: techstock   # Nome do BANCO DE DADOS
+      POSTGRES_USER: giovana   # Nome de USUÁRIO
+      POSTGRES_PASSWORD: giovana123   # Criação de SENHA para o USUÁRIO
+
+    ports:
+      - "5432:5432"
+
+    volumes:
+      - techstock_postgres_data:/var/lib/postgresql/data
+
+volumes:
+  techstock_postgres_data:
