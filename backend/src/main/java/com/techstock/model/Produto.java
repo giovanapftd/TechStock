@@ -1,24 +1,48 @@
 package com.techstock.model;
 
-import jakarta.persistence.*;   /* Anotações de JPA */
-import java.math.BigDecimal;   /* Armazenar Valores Monetários */
+import jakarta.persistence.*; // Anotações do JPA
+import jakarta.validation.constraints.*; // Regras de validação
+import java.math.BigDecimal; // Armazenar Valores Monetários
 
-
-@Entity   /* Diz Para o Spring Que Essa Classe Representa Algo Que Será Salvo no Banco */
-@Table(name = "produtos")   /* Tabela Chamada PRODUTOS */
+@Entity // Diz Para o Spring que essa classe representa algo salvo no banco
+@Table(name = "produtos") // Define o Nome da Tabela no BANCO DE DADOS
 public class Produto {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)   /* Gerar ID's Automaticamente */
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Gera os IDs Automaticamente
     private Long id;
+
+    // Regras Para Validação Do Cadastro De Produtos
+    @NotBlank(message = "Nome é obrigatório")
     private String nome;
+
+    @NotBlank(message = "Descrição é obrigatória")
     private String descricao;
+
+    @DecimalMin(
+            value = "0.0",
+            message = "Preço deve ser positivo"
+    )
     private BigDecimal preco;
+
+    @Min(
+            value = 0,
+            message = "Quantidade não pode ser negativa"
+    )
     private Integer quantidade;
 
-    public Produto(){
+
+    // Construtor Vazio Exigido Pelo JPA
+    public Produto() {
     }
 
-    public Produto(String nome, String descricao, BigDecimal preco, Integer quantidade) {
+
+    // Construtor com os Dados dos Produto
+    public Produto(
+            String nome,
+            String descricao,
+            BigDecimal preco,
+            Integer quantidade
+    ) {
         this.nome = nome;
         this.descricao = descricao;
         this.preco = preco;
@@ -26,40 +50,48 @@ public class Produto {
     }
 
 
-
-    public Long getId(){
+    // GET e SET do ID
+    public Long getId() {
         return id;
     }
 
 
-    public String getNome(){
+    // GET e SET do Nome
+    public String getNome() {
         return nome;
     }
-    public void setNome(String nome){
+
+    public void setNome(String nome) {
         this.nome = nome;
     }
 
 
-    public String getDescricao(){
+    // GET e SET da Descrição
+    public String getDescricao() {
         return descricao;
     }
-    public void setDescricao (String descricao){
+
+    public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
 
 
-    public BigDecimal getPreco(){
+    // GET e SET do Preço
+    public BigDecimal getPreco() {
         return preco;
     }
-    public void setPreco(BigDecimal preco){
+
+    public void setPreco(BigDecimal preco) {
         this.preco = preco;
     }
 
 
-    public Integer getQuantidade(){
+    // GET e SET da Quantidade
+    public Integer getQuantidade() {
         return quantidade;
     }
-    public void setQuantidade(Integer quantidade){
+
+    public void setQuantidade(Integer quantidade) {
         this.quantidade = quantidade;
     }
 }
