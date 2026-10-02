@@ -1,8 +1,11 @@
-import { Link } from "react-router-dom";
+import { useCarrinho } from "../context/CarrinhoContext";
+import { Link, useNavigate } from "react-router-dom";
 import produtos from "../data/produtos.js";
 import "./Loja.css";
 
 function Loja() {
+const navigate = useNavigate();
+const { totalItens } = useCarrinho();
 const categorias = [
 "Periféricos",
 "Monitores",
@@ -32,8 +35,8 @@ return (
         Entrar
         </button>
 
-        <button className="cart-button">
-        Carrinho
+        <button className="cart-button" onClick={() => navigate("/carrinho")}>
+        Carrinho ({totalItens})
         </button>
     </div>
 
@@ -180,10 +183,10 @@ id="produtos"
         </strong>
 
         <Link
-        to="/produtos"
+        to={`/produtos/${produto.id}`}
         className="home-product-button"
         >
-        Ver produtos
+        Ver detalhes
         </Link>
 
     </div>

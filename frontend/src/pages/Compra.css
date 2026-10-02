@@ -1,0 +1,24 @@
+.compra-page { min-height: 100vh; background: #f8fafc; color: #111827; }
+.compra-header { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 24px max(24px, calc((100% - 1160px) / 2)); background: white; border-bottom: 1px solid #e5e7eb; }
+.compra-logo { font-size: 24px; font-weight: 800; text-decoration: none; color: #111827; }
+.compra-logo span { color: #2563eb; }
+.compra-header nav { display: flex; flex-wrap: wrap; gap: 24px; }
+.compra-header nav a, .compra-container a { color: #2563eb; }
+.compra-container { max-width: 1208px; margin: auto; padding: 40px 24px 64px; }
+.compra-container h1 { font-size: clamp(28px, 4vw, 40px); }
+.compra-card { background: white; border: 1px solid #e5e7eb; border-radius: 12px; padding: 24px; }
+.compra-card p, .compra-container > p { color: #6b7280; line-height: 1.6; }
+.compra-categoria { font-size: 12px; color: #2563eb; font-weight: 700; letter-spacing: 1px; }
+.compra-preco { display: block; font-size: 30px; }
+.compra-primary { display: inline-block; border: 0; border-radius: 8px; padding: 14px 20px; background: #2563eb; color: white; font-weight: 700; text-decoration: none; cursor: pointer; }
+.compra-container a.compra-primary { color: white; }
+.compra-primary:hover:not(:disabled) { background: #1d4ed8; }
+.compra-page button:disabled { opacity: .5; cursor: not-allowed; }
+.compra-quantidade { display: inline-flex; align-items: center; border: 1px solid #d1d5db; border-radius: 8px; overflow: hidden; margin: 0 0 16px; }
+.compra-quantidade button { height: 40px; width: 40px; border: 0; background: #f3f4f6; cursor: pointer; font-size: 20px; }
+.compra-quantidade output { min-width: 44px; text-align: center; }
+.detalhes-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 30px; }
+.detalhes-imagem { width: 100%; border-radius: 12px; object-fit: contain; background: white; }
+.detalhes-layout .compra-primary { display: block; width: 100%; }
+a:focus-visible { outline: 3px solid #60a5fa; outline-offset: 3px; }
+@media (max-width: 700px) { .compra-header { flex-wrap: wrap; padding: 20px; } .compra-header nav { gap: 16px; } .detalhes-layout { grid-template-columns: 1fr; gap: 20px; } }

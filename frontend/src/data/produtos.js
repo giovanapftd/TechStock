@@ -65,4 +65,6 @@ imagem: "https://placehold.co/600x400?text=SSD"
 }
 ];
 
-export default produtos;
+// Estoques fictícios usados apenas na demonstração do frontend.
+const estoques = [15, 8, 4, 12, 3, 20, 6, 10];
+export default produtos.map((produto, indice) => ({ ...produto, estoque: estoques[indice] }));
