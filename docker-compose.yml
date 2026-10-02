@@ -33,6 +33,8 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/techstock
       SPRING_DATASOURCE_USERNAME: giovana
       SPRING_DATASOURCE_PASSWORD: giovana123
+      # Senha inicial da conta administrativa; definida fora do código.
+      TECHSTOCK_ADMIN_PASSWORD: ${TECHSTOCK_ADMIN_PASSWORD:-}
 
 volumes:
   techstock_postgres_data:

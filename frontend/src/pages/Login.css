@@ -1,0 +1,30 @@
+.login-container { max-width: 1100px; margin: auto; padding: 64px 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+.login-apresentacao { padding: 48px 36px; border-radius: 16px; background: linear-gradient(135deg, #111827, #172554); color: white; }
+.login-tag { font-size: 12px; color: #93c5fd; font-weight: 700; letter-spacing: 2px; }
+.login-apresentacao h1 { font-size: clamp(32px, 4vw, 48px); line-height: 1.15; letter-spacing: -1px; }
+.login-apresentacao p { line-height: 1.7; color: #cbd5e1; margin-bottom: 32px; }
+.login-apresentacao a { color: #bfdbfe; font-weight: 600; }
+.login-card { padding: 32px; }
+.login-card h2 { font-size: 26px; margin: 0 0 12px; }
+.login-card form { margin-top: 28px; }
+.login-card label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 8px; }
+.login-card input { width: 100%; min-width: 0; padding: 13px 14px; border: 1px solid #d1d5db; border-radius: 8px; background: white; color: #111827; }
+.login-card input:focus-visible { outline: 3px solid #93c5fd; outline-offset: 2px; }
+#login-email { margin-bottom: 22px; }
+.login-senha { display: flex; gap: 8px; align-items: center; }
+.login-senha button { padding: 12px; border: 1px solid #d1d5db; border-radius: 8px; background: #f8fafc; color: #374151; cursor: pointer; }
+.login-enviar { width: 100%; margin-top: 24px; }
+.login-card .login-status { font-size: 14px; color: #1d4ed8; }
+.login-status:empty { display: none; }
+.login-aviso { margin-top: 24px; padding: 16px; border-radius: 8px; background: #eff6ff; font-size: 13px; }
+.login-aviso strong { color: #1e40af; }
+.login-aviso p { margin: 8px 0 0; }
+.login-cadastro { font-size: 13px; }
+.login-voltar { display: inline-block; margin-top: 8px; color: #2563eb; font-size: 14px; }
+.login-footer { padding: 24px; text-align: center; color: #6b7280; font-size: 13px; }
+@media (max-width: 800px) { .login-container { grid-template-columns: 1fr; max-width: 560px; gap: 24px; padding-top: 32px; } .login-apresentacao { padding: 28px; } }
+@media (max-width: 400px) { .login-container { padding: 24px 16px; } .login-card { padding: 24px 18px; } }
+
+.conta-campos { border: 0; padding: 0; margin: 0; min-width: 0; }
+#conta-nome { margin-bottom: 22px; }
+.conta-erro { color: #b91c1c !important; font-size: 14px; line-height: 1.5; }

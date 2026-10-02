@@ -1,3 +1,4 @@
+import AcessoConta from "./AcessoConta";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import produtos from "../data/produtos";
@@ -77,9 +78,7 @@ return (
 
     <div className="produtos-actions">
 
-        <button>
-        Entrar
-        </button>
+        <AcessoConta />
 
         <button className="cart-button" onClick={() => navigate("/carrinho")}>
         Carrinho ({totalItens})
@@ -235,3 +234,4 @@ return (
 }
 
 export default Produtos;
+

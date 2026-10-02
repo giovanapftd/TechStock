@@ -1,3 +1,4 @@
+import AcessoConta from "./AcessoConta";
 import { useCarrinho } from "../context/CarrinhoContext";
 import { Link, useNavigate } from "react-router-dom";
 import produtos from "../data/produtos.js";
@@ -31,9 +32,7 @@ return (
     </nav>
 
     <div className="loja-actions">
-        <button className="login-button">
-        Entrar
-        </button>
+        <AcessoConta />
 
         <button className="cart-button" onClick={() => navigate("/carrinho")}>
         Carrinho ({totalItens})
@@ -252,3 +251,4 @@ id="produtos"
 }
 
 export default Loja;
+
