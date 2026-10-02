@@ -1,10 +1,11 @@
 import { useState } from "react";
-import produtos from "../data/produtos";
+import { useProdutos } from "./ProdutosContext";
 import { CarrinhoContext } from "./CarrinhoContext";
 
 // O estado é compartilhado entre as páginas e dura enquanto o site está aberto.
 export default function CarrinhoProvider({ children }) {
   const [itens, setItens] = useState([]);
+  const { produtos } = useProdutos();
 
   function adicionar(id, quantidade = 1) {
     const produto = produtos.find((item) => item.id === id);
@@ -28,9 +29,13 @@ export default function CarrinhoProvider({ children }) {
     setItens((atuais) => atuais.filter((item) => item.id !== id));
   }
 
-  const itensComProdutos = itens.map((item) => ({ ...produtos.find((produto) => produto.id === item.id), quantidade: item.quantidade }));
+  // Quantidade e disponibilidade são reavaliadas quando o catálogo é atualizado.
+  const itensComProdutos = itens.flatMap((item) => {
+    const produto = produtos.find((produto) => produto.id === item.id);
+    return produto && produto.estoque > 0 ? [{ ...produto, quantidade: Math.min(item.quantidade, produto.estoque) }] : [];
+  });
   const totalCentavos = itensComProdutos.reduce((total, item) => total + Math.round(item.preco * 100) * item.quantidade, 0);
-  const totalItens = itens.reduce((total, item) => total + item.quantidade, 0);
+  const totalItens = itensComProdutos.reduce((total, item) => total + item.quantidade, 0);
 
   return (
     <CarrinhoContext.Provider value={{ itens: itensComProdutos, adicionar, alterarQuantidade, remover, total: totalCentavos / 100, totalItens }}>

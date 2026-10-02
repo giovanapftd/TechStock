@@ -1,12 +1,13 @@
 import AcessoConta from "./AcessoConta";
 import { useCarrinho } from "../context/CarrinhoContext";
 import { Link, useNavigate } from "react-router-dom";
-import produtos from "../data/produtos.js";
+import { useProdutos } from "../context/ProdutosContext";
 import "./Loja.css";
 
 function Loja() {
 const navigate = useNavigate();
 const { totalItens } = useCarrinho();
+const { produtos, carregandoProdutos, erroProdutos, recarregarProdutos } = useProdutos();
 const categorias = [
 "Periféricos",
 "Monitores",
@@ -149,6 +150,9 @@ id="produtos"
 
 
 <div className="home-products">
+{carregandoProdutos && <p role="status">Carregando produtos…</p>}
+{erroProdutos && <div><p role="alert">{erroProdutos}</p><button onClick={recarregarProdutos}>Tentar novamente</button></div>}
+{!carregandoProdutos && !erroProdutos && produtos.length === 0 && <p>Nenhum produto disponível no momento.</p>}
 
 {produtos.slice(0, 4).map((produto) => (
 

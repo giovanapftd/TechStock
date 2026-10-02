@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
 import { useCarrinho } from "../context/CarrinhoContext";
+import { useProdutos } from "../context/ProdutosContext";
 import "./Carrinho.css";
 
 const moeda = (valor) => valor.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 
 export default function Carrinho() {
   const { itens, alterarQuantidade, remover, total, totalItens } = useCarrinho();
+  const { carregandoProdutos, erroProdutos, recarregarProdutos } = useProdutos();
   return (
     <div className="compra-page">
       <header className="compra-header">
@@ -16,7 +18,7 @@ export default function Carrinho() {
         <span className="compra-categoria">SUA SELEÇÃO</span>
         <h1>Meu carrinho</h1>
         <p>Revise os produtos e as quantidades antes de continuar.</p>
-        {itens.length === 0 ? (
+        {carregandoProdutos ? <p role="status">Carregando produtos do carrinho…</p> : erroProdutos ? <section><p role="alert">{erroProdutos}</p><button onClick={recarregarProdutos}>Tentar novamente</button></section> : itens.length === 0 ? (
           <section className="compra-card carrinho-vazio">
             <h2>Seu carrinho está vazio</h2>
             <p>Explore nosso catálogo e escolha produtos para seu setup.</p>
@@ -55,7 +57,7 @@ export default function Carrinho() {
             </aside>
           </div>
         )}
-        <p className="carrinho-nota">Carrinho demonstrativo: os itens ficam salvos enquanto o site está aberto. Ao recarregar a página, o carrinho será esvaziado.</p>
+        <p className="carrinho-nota">O carrinho usa os preços e estoques do catálogo. Os itens selecionados ficam nesta sessão e são removidos ao recarregar a página. Produtos indisponíveis são retirados da seleção.</p>
       </main>
     </div>
   );

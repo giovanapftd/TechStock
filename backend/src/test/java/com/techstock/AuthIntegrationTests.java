@@ -93,6 +93,9 @@ class AuthIntegrationTests {
         mvc.perform(options("/api/auth/login").header("Origin", "http://localhost:5173")
             .header("Access-Control-Request-Method", "POST").header("Access-Control-Request-Headers", "X-CSRF-TOKEN"))
             .andExpect(status().isOk()).andExpect(header().string("Access-Control-Allow-Credentials", "true"));
+        mvc.perform(options("/api/auth/login").header("Origin", "http://localhost:5174")
+            .header("Access-Control-Request-Method", "POST").header("Access-Control-Request-Headers", "X-CSRF-TOKEN"))
+            .andExpect(status().isOk()).andExpect(header().string("Access-Control-Allow-Origin", "http://localhost:5174"));
         mvc.perform(options("/api/auth/login").header("Origin", "https://outro.example")
             .header("Access-Control-Request-Method", "POST"))
             .andExpect(status().isForbidden());

@@ -27,6 +27,8 @@ public class ProdutoService {
         produto.setDescricao(produtoAtualizado.getDescricao());
         produto.setPreco(produtoAtualizado.getPreco());
         produto.setQuantidade(produtoAtualizado.getQuantidade());
+        produto.setCategoria(produtoAtualizado.getCategoria());
+        produto.setImagem(produtoAtualizado.getImagem());
 
         return produtoRepository.save(produto);
     }

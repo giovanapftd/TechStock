@@ -1,11 +1,14 @@
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import produtos from "../data/produtos";
+import { useProdutos } from "../context/ProdutosContext";
 import { useCarrinho } from "../context/CarrinhoContext";
 
 export default function ProdutoDetalhes() {
   const { id } = useParams();
+  const { produtos, carregandoProdutos, erroProdutos, recarregarProdutos } = useProdutos();
   const produto = produtos.find((item) => String(item.id) === id);
+  if (carregandoProdutos) return <main className="compra-container" role="status">Carregando produto…</main>;
+  if (erroProdutos) return <main className="compra-container"><p role="alert">{erroProdutos}</p><button onClick={recarregarProdutos}>Tentar novamente</button></main>;
   if (!produto) return <main className="compra-container"><h1>Produto não encontrado</h1><Link to="/produtos">Voltar para produtos</Link></main>;
   return <Detalhes key={produto.id} produto={produto} />;
 }
@@ -37,7 +40,7 @@ function Detalhes({ produto }) {
             <h1>{produto.nome}</h1>
             <p>{produto.descricao}</p>
             <strong className="compra-preco">{moeda(produto.preco)}</strong>
-            <p>{produto.estoque} unidades no estoque fictício</p>
+            <p>{produto.estoque} unidades em estoque</p>
             <div className="compra-quantidade" aria-label="Quantidade">
               <button aria-label="Diminuir quantidade" disabled={quantidade <= 1} onClick={() => setQuantidade(quantidade - 1)}>−</button>
               <output>{quantidade}</output>

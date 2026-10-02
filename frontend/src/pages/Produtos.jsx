@@ -1,7 +1,7 @@
 import AcessoConta from "./AcessoConta";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import produtos from "../data/produtos";
+import { useProdutos } from "../context/ProdutosContext";
 import { useCarrinho } from "../context/CarrinhoContext";
 import "./Produtos.css";
 
@@ -9,6 +9,7 @@ function Produtos() {
 
 const navigate = useNavigate();
 const { totalItens } = useCarrinho();
+const { produtos, carregandoProdutos, erroProdutos, recarregarProdutos } = useProdutos();
 
 const [busca, setBusca] = useState("");
 
@@ -22,7 +23,8 @@ const categorias = [
 "Monitores",
 "Áudio",
 "Acessórios",
-"Componentes"
+"Componentes",
+"Sem categoria"
 ];
 
 
@@ -149,13 +151,13 @@ return (
 
     <section className="catalog">
 
-    {produtosFiltrados.length === 0 ? (
+    {carregandoProdutos ? <p role="status">Carregando produtos…</p> : erroProdutos ? <div><p role="alert">{erroProdutos}</p><button onClick={recarregarProdutos}>Tentar novamente</button></div> : produtosFiltrados.length === 0 ? (
 
         <div className="no-products">
         <h2>Nenhum produto encontrado</h2>
 
         <p>
-            Tente pesquisar por outro produto.
+            {produtos.length === 0 ? "Novos produtos aparecerão aqui quando forem cadastrados." : "Tente pesquisar por outro produto."}
         </p>
         </div>
 

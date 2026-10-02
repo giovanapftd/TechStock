@@ -10,7 +10,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/produtos")
-@CrossOrigin(origins = "http://localhost:5173")
 public class ProdutoController {
 
     private final ProdutoService produtoService;
@@ -22,9 +21,9 @@ public class ProdutoController {
     @PutMapping("/{id}")
     public Produto atualizar(
             @PathVariable Long id,
-            @RequestBody Produto produto) {
+            @Valid @RequestBody ProdutoRequest produto) {
 
-        return produtoService.atualizar(id, produto);
+        return produtoService.atualizar(id, produto.toProduto());
     }
 
     @DeleteMapping("/{id}")
@@ -46,8 +45,8 @@ public class ProdutoController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Produto cadastrar(
-            @Valid @RequestBody Produto produto) {
+            @Valid @RequestBody ProdutoRequest produto) {
 
-        return produtoService.salvar(produto);
+        return produtoService.salvar(produto.toProduto());
     }
 }

@@ -47,7 +47,7 @@ public class SecurityConfig {
 
     @Bean @Order(1)
     SecurityFilterChain authSecurity(HttpSecurity http, SecurityContextRepository context, CsrfTokenRepository csrf) throws Exception {
-        return http.securityMatcher("/api/auth/**")
+        return http.securityMatcher("/api/**")
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
             .csrf(config -> config.csrfTokenRepository(csrf))
             .securityContext(config -> config.securityContextRepository(context))
@@ -55,7 +55,13 @@ public class SecurityConfig {
                 .requestMatchers("/api/auth/admin").hasRole("ADMINISTRADOR")
                 .requestMatchers(HttpMethod.GET, "/api/auth/csrf").permitAll()
                 .requestMatchers(HttpMethod.POST, "/api/auth/cadastro", "/api/auth/login").permitAll()
-                .anyRequest().authenticated())
+                .requestMatchers(HttpMethod.GET, "/api/produtos", "/api/produtos/**").permitAll()
+                // Cadastro, edição e exclusão são autorizados pelo servidor apenas para administradores.
+                .requestMatchers(HttpMethod.POST, "/api/produtos").hasRole("ADMINISTRADOR")
+                .requestMatchers(HttpMethod.PUT, "/api/produtos/**").hasRole("ADMINISTRADOR")
+                .requestMatchers(HttpMethod.DELETE, "/api/produtos/**").hasRole("ADMINISTRADOR")
+                .requestMatchers("/api/auth/me").authenticated()
+                .anyRequest().denyAll())
             .exceptionHandling(errors -> errors
                 .authenticationEntryPoint((request, response, error) -> response.sendError(401))
                 .accessDeniedHandler((request, response, error) -> response.sendError(403)))
@@ -65,22 +71,23 @@ public class SecurityConfig {
             .build();
     }
 
-    // Mantém as rotas de produtos na fase atual. As permissões administrativas virão depois.
+    // A página de erro do Spring não contém operações da API.
     @Bean @Order(2)
     SecurityFilterChain rotasExistentes(HttpSecurity http) throws Exception {
         return http.csrf(csrf -> csrf.disable())
-            .authorizeHttpRequests(auth -> auth.anyRequest().permitAll()).build();
+            .authorizeHttpRequests(auth -> auth.requestMatchers("/error").permitAll().anyRequest().denyAll()).build();
     }
 
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of("http://localhost:5173"));
-        config.setAllowedMethods(List.of("GET", "POST", "OPTIONS"));
+        // Portas usadas pelo Vite no desenvolvimento local.
+        config.setAllowedOrigins(List.of("http://localhost:5173", "http://localhost:5174"));
+        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("Content-Type", "X-CSRF-TOKEN"));
         config.setAllowCredentials(true);
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/api/auth/**", config);
+        source.registerCorsConfiguration("/api/**", config);
         return source;
     }
 }

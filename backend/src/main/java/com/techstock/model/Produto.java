@@ -16,6 +16,7 @@ public class Produto {
     private String nome;
 
     @NotBlank(message = "Descrição é obrigatória")
+    @Column(length = 1000)
     private String descricao;
 
     @DecimalMin(
@@ -29,6 +30,16 @@ public class Produto {
             message = "Quantidade não pode ser negativa"
     )
     private Integer quantidade;
+
+    @Column(length = 60)
+    private String categoria;
+    @Column(length = 2048)
+    private String imagem;
+
+    public String getCategoria() { return categoria == null || categoria.isBlank() ? "Sem categoria" : categoria; }
+    public void setCategoria(String categoria) { this.categoria = categoria; }
+    public String getImagem() { return imagem; }
+    public void setImagem(String imagem) { this.imagem = imagem; }
 
 
     // Construtor Vazio Exigido Pelo JPA
