@@ -1,0 +1,375 @@
+.produtos-page {
+min-height: 100vh;
+background: #f8fafc;
+color: #111827;
+}
+
+
+/* HEADER */
+
+.produtos-header {
+height: 76px;
+
+padding: 0 7%;
+
+display: flex;
+align-items: center;
+justify-content: space-between;
+
+background: white;
+
+border-bottom: 1px solid #e5e7eb;
+}
+
+.produtos-logo {
+font-size: 24px;
+font-weight: 800;
+}
+
+.produtos-logo span {
+color: #2563eb;
+}
+
+.produtos-header nav {
+display: flex;
+gap: 30px;
+}
+
+.produtos-header nav a {
+color: #4b5563;
+text-decoration: none;
+font-size: 14px;
+}
+
+.produtos-header nav a:hover {
+color: #2563eb;
+}
+
+.produtos-actions {
+display: flex;
+gap: 10px;
+}
+
+.produtos-actions button {
+padding: 9px 16px;
+
+border: 1px solid #d1d5db;
+
+border-radius: 7px;
+
+background: white;
+
+cursor: pointer;
+}
+
+.produtos-actions .cart-button {
+background: #2563eb;
+border-color: #2563eb;
+color: white;
+}
+
+
+/* TÍTULO */
+
+.catalog-header {
+padding: 70px 8% 45px;
+
+text-align: center;
+
+background: white;
+}
+
+.catalog-header span {
+color: #2563eb;
+
+font-size: 12px;
+
+font-weight: 700;
+
+letter-spacing: 2px;
+}
+
+.catalog-header h1 {
+margin: 12px 0;
+
+font-size: 40px;
+}
+
+.catalog-header p {
+color: #6b7280;
+}
+
+
+/* FILTROS */
+
+.filters {
+padding: 25px 8%;
+
+background: white;
+
+border-top: 1px solid #e5e7eb;
+border-bottom: 1px solid #e5e7eb;
+}
+
+.filters input {
+width: 100%;
+
+padding: 14px 16px;
+
+border: 1px solid #d1d5db;
+
+border-radius: 7px;
+
+font-size: 14px;
+
+outline: none;
+
+margin-bottom: 18px;
+}
+
+.filters input:focus {
+border-color: #2563eb;
+}
+
+.category-filters {
+display: flex;
+
+gap: 10px;
+
+flex-wrap: wrap;
+}
+
+.category-filters button {
+padding: 9px 15px;
+
+border: 1px solid #d1d5db;
+
+border-radius: 20px;
+
+background: white;
+
+color: #4b5563;
+
+cursor: pointer;
+}
+
+.category-filters button:hover {
+border-color: #2563eb;
+color: #2563eb;
+}
+
+.category-filters button.selected {
+background: #2563eb;
+
+border-color: #2563eb;
+
+color: white;
+}
+
+
+/* CATÁLOGO */
+
+.catalog {
+padding: 50px 8%;
+}
+
+.catalog-grid {
+display: grid;
+
+grid-template-columns:
+repeat(4, 1fr);
+
+gap: 22px;
+}
+
+.catalog-card {
+background: white;
+
+border: 1px solid #e5e7eb;
+
+border-radius: 10px;
+
+overflow: hidden;
+
+transition: 0.2s;
+}
+
+.catalog-card:hover {
+transform: translateY(-4px);
+
+box-shadow:
+0 8px 25px rgba(0, 0, 0, 0.07);
+}
+
+.catalog-image {
+height: 200px;
+
+background: #f3f4f6;
+}
+
+.catalog-image img {
+width: 100%;
+height: 100%;
+
+object-fit: cover;
+}
+
+.catalog-info {
+padding: 20px;
+}
+
+.catalog-info > span {
+color: #2563eb;
+
+font-size: 12px;
+
+font-weight: 600;
+}
+
+.catalog-info h2 {
+margin: 8px 0;
+
+font-size: 17px;
+}
+
+.catalog-info p {
+min-height: 42px;
+
+margin-bottom: 15px;
+
+color: #6b7280;
+
+font-size: 13px;
+
+line-height: 1.5;
+}
+
+.catalog-info strong {
+display: block;
+
+margin-bottom: 17px;
+
+font-size: 20px;
+}
+
+.details-button {
+width: 100%;
+
+padding: 10px;
+
+border: 1px solid #2563eb;
+
+border-radius: 7px;
+
+background: white;
+
+color: #2563eb;
+
+font-weight: 600;
+
+cursor: pointer;
+}
+
+.details-button:hover {
+background: #2563eb;
+
+color: white;
+}
+
+
+/* NENHUM PRODUTO */
+
+.no-products {
+padding: 70px;
+
+text-align: center;
+
+background: white;
+
+border-radius: 10px;
+}
+
+.no-products p {
+margin-top: 10px;
+
+color: #6b7280;
+}
+
+
+/* FOOTER */
+
+.catalog-footer {
+padding: 35px 8%;
+
+background: #111827;
+
+color: #9ca3af;
+
+display: flex;
+
+justify-content: space-between;
+}
+
+.catalog-footer strong {
+color: white;
+}
+
+
+/* RESPONSIVO */
+
+@media (max-width: 1100px) {
+
+.catalog-grid {
+grid-template-columns:
+    repeat(3, 1fr);
+}
+
+}
+
+@media (max-width: 800px) {
+
+.produtos-header nav {
+display: none;
+}
+
+.catalog-grid {
+grid-template-columns:
+    repeat(2, 1fr);
+}
+
+}
+
+@media (max-width: 550px) {
+
+.produtos-header {
+padding: 0 20px;
+}
+
+.produtos-actions {
+display: none;
+}
+
+.catalog-header {
+padding: 50px 20px 35px;
+}
+
+.catalog-header h1 {
+font-size: 32px;
+}
+
+.filters,
+.catalog {
+padding-left: 20px;
+padding-right: 20px;
+}
+
+.catalog-grid {
+grid-template-columns: 1fr;
+}
+
+.catalog-footer {
+flex-direction: column;
+gap: 10px;
+}
+
+}
