@@ -1,11 +1,44 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useProdutos } from "./ProdutosContext";
 import { CarrinhoContext } from "./CarrinhoContext";
 
-// O estado é compartilhado entre as páginas e dura enquanto o site está aberto.
+const CHAVE_CARRINHO = "techstock:carrinho:v1";
+
+function carregarCarrinho() {
+  try {
+    const dados = JSON.parse(localStorage.getItem(CHAVE_CARRINHO) || "[]");
+    if (!Array.isArray(dados)) return [];
+    const ids = new Set();
+    return dados.filter((item) => {
+      if (!item || !Number.isSafeInteger(item.id) || item.id < 1 ||
+        !Number.isSafeInteger(item.quantidade) || item.quantidade < 1 || ids.has(item.id)) return false;
+      ids.add(item.id);
+      return true;
+    }).map(({ id, quantidade }) => ({ id, quantidade }));
+  } catch {
+    return [];
+  }
+}
+
+// Somente IDs e quantidades ficam no navegador. Preços e estoque vêm do banco.
 export default function CarrinhoProvider({ children }) {
-  const [itens, setItens] = useState([]);
-  const { produtos } = useProdutos();
+  const [itens, setItens] = useState(carregarCarrinho);
+  const { produtos, carregandoProdutos, erroProdutos } = useProdutos();
+
+  useEffect(() => {
+    // Não apagar a seleção enquanto o catálogo carrega ou o servidor está indisponível.
+    if (carregandoProdutos || erroProdutos) return;
+    const disponiveis = itens.flatMap((item) => {
+      const produto = produtos.find((produto) => produto.id === item.id);
+      return produto && produto.estoque > 0
+        ? [{ id: item.id, quantidade: Math.min(item.quantidade, produto.estoque) }] : [];
+    });
+    try {
+      localStorage.setItem(CHAVE_CARRINHO, JSON.stringify(disponiveis));
+    } catch {
+      // Se o navegador bloquear o armazenamento, o carrinho continua nesta sessão.
+    }
+  }, [itens, produtos, carregandoProdutos, erroProdutos]);
 
   function adicionar(id, quantidade = 1) {
     const produto = produtos.find((item) => item.id === id);

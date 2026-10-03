@@ -57,7 +57,7 @@ export default function Carrinho() {
             </aside>
           </div>
         )}
-        <p className="carrinho-nota">O carrinho usa os preços e estoques do catálogo. Os itens selecionados ficam nesta sessão e são removidos ao recarregar a página. Produtos indisponíveis são retirados da seleção.</p>
+        <p className="carrinho-nota">Sua seleção é salva neste navegador quando o armazenamento está disponível. Ao voltar, os preços e as quantidades são conferidos com o catálogo atual. Produtos indisponíveis não aparecem no carrinho. Os itens não ficam reservados no estoque.</p>
       </main>
     </div>
   );
