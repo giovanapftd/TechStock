@@ -57,7 +57,7 @@ return (
     </div>
 
 
-    <nav>
+    <nav aria-label="Navegação principal">
 
         <Link to="/">
         Início
@@ -113,7 +113,8 @@ return (
     <section className="filters">
 
     <input
-        type="text"
+        type="search"
+        aria-label="Pesquisar produto pelo nome"
         placeholder="Pesquisar produto..."
         value={busca}
         onChange={(event) =>
@@ -128,6 +129,7 @@ return (
 
         <button
             key={categoria}
+            aria-pressed={categoriaSelecionada === categoria}
             className={
             categoriaSelecionada === categoria
                 ? "selected"
@@ -197,7 +199,7 @@ return (
                 </p>
 
                 <strong>
-                R$ {produto.preco.toFixed(2)}
+                {produto.preco.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}
                 </strong>
 
                 <button className="details-button" onClick={() => navigate(`/produtos/${produto.id}`)}>

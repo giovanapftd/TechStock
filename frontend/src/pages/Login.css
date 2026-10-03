@@ -4,6 +4,9 @@
 .login-apresentacao h1 { font-size: clamp(32px, 4vw, 48px); line-height: 1.15; letter-spacing: -1px; }
 .login-apresentacao p { line-height: 1.7; color: #cbd5e1; margin-bottom: 32px; }
 .login-apresentacao a { color: #bfdbfe; font-weight: 600; }
+.login-apresentacao a:hover { color: white; }
+.login-card a { color: #2563eb; font-weight: 600; }
+.login-card a:hover { color: #1d4ed8; }
 .login-card { padding: 32px; }
 .login-card h2 { font-size: 26px; margin: 0 0 12px; }
 .login-card form { margin-top: 28px; }

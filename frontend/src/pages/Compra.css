@@ -3,7 +3,9 @@
 .compra-logo { font-size: 24px; font-weight: 800; text-decoration: none; color: #111827; }
 .compra-logo span { color: #2563eb; }
 .compra-header nav { display: flex; flex-wrap: wrap; gap: 24px; }
-.compra-header nav a, .compra-container a { color: #2563eb; }
+.compra-header nav a { color: #4b5563; padding: 8px 12px; border-radius: 8px; font-size: 14px; font-weight: 600; text-decoration: none; }
+.compra-header nav a:hover, .compra-header nav a[aria-current="page"] { color: #1d4ed8; background: #eff6ff; }
+.compra-container a { color: #2563eb; }
 .compra-container { max-width: 1208px; margin: auto; padding: 40px 24px 64px; }
 .compra-container h1 { font-size: clamp(28px, 4vw, 40px); }
 .compra-card { background: white; border: 1px solid #e5e7eb; border-radius: 12px; padding: 24px; }

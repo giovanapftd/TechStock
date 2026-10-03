@@ -50,10 +50,8 @@ export default function Carrinho() {
               <h2>Resumo</h2>
               <p>{totalItens} {totalItens === 1 ? "item" : "itens"}</p>
               <div><span>Subtotal</span><strong>{moeda(total)}</strong></div>
-              <p>Frete será calculado na etapa de finalização.</p>
               <div className="carrinho-total" aria-live="polite"><span>Total dos produtos</span><strong>{moeda(total)}</strong></div>
-              <button className="compra-primary" disabled>Finalizar compra</button>
-              <small>A finalização será disponibilizada na próxima etapa.</small>
+              <small>O carrinho permite selecionar produtos e consultar o total. Esta versão não realiza pedidos ou pagamentos.</small>
             </aside>
           </div>
         )}

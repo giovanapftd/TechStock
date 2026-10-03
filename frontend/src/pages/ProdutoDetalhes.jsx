@@ -19,9 +19,11 @@ function Detalhes({ produto }) {
   const [mensagem, setMensagem] = useState("");
   const noCarrinho = itens.find((item) => item.id === produto.id)?.quantidade ?? 0;
   const disponivel = produto.estoque - noCarrinho;
+  const quantidadeSelecionada = Math.min(quantidade, Math.max(1, disponivel));
 
   function adicionarProduto() {
-    adicionar(produto.id, Math.min(quantidade, disponivel));
+    if (disponivel < 1) return;
+    adicionar(produto.id, quantidadeSelecionada);
     setMensagem("Produto adicionado ao carrinho.");
   }
 
@@ -42,11 +44,11 @@ function Detalhes({ produto }) {
             <strong className="compra-preco">{moeda(produto.preco)}</strong>
             <p>{produto.estoque} unidades em estoque</p>
             <div className="compra-quantidade" aria-label="Quantidade">
-              <button aria-label="Diminuir quantidade" disabled={quantidade <= 1} onClick={() => setQuantidade(quantidade - 1)}>−</button>
-              <output>{quantidade}</output>
-              <button aria-label="Aumentar quantidade" disabled={quantidade >= disponivel} onClick={() => setQuantidade(quantidade + 1)}>+</button>
+              <button aria-label="Diminuir quantidade" disabled={quantidadeSelecionada <= 1 || disponivel < 1} onClick={() => setQuantidade(quantidadeSelecionada - 1)}>−</button>
+              <output>{disponivel > 0 ? quantidadeSelecionada : 0}</output>
+              <button aria-label="Aumentar quantidade" disabled={quantidadeSelecionada >= disponivel} onClick={() => setQuantidade(quantidadeSelecionada + 1)}>+</button>
             </div>
-            <button className="compra-primary" disabled={disponivel === 0} onClick={adicionarProduto}>{disponivel === 0 ? "Limite de estoque no carrinho" : "Adicionar ao carrinho"}</button>
+            <button className="compra-primary" disabled={disponivel <= 0} onClick={adicionarProduto}>{produto.estoque === 0 ? "Sem estoque" : disponivel <= 0 ? "Limite de estoque no carrinho" : "Adicionar ao carrinho"}</button>
             <p role="status">{mensagem}</p>
             <Link to="/carrinho">Ver meu carrinho</Link>
           </div>
