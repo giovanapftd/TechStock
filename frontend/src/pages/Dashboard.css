@@ -36,3 +36,7 @@
 .admin-erro { color: #b91c1c; }
 @media (max-width: 1000px) { .admin-sidebar { width: 200px; } .admin-main { padding: 28px 24px; } .admin-cards { grid-template-columns: 1fr; } }
 @media (max-width: 650px) { .admin-page { flex-direction: column; } .admin-sidebar { width: 100%; padding: 20px; } .admin-sidebar nav { flex-direction: row; flex-wrap: wrap; } .admin-sair { align-self: flex-start; } .admin-topo, .admin-produtos-topo { flex-wrap: wrap; } .admin-main { padding: 24px 16px; } }
+
+.dashboard-acoes { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+.dashboard-acoes p { margin: 0; color: #6b7280; }
+.dashboard-acoes button { border: 1px solid #d1d5db; border-radius: 8px; padding: 10px 16px; background: white; color: #1f2937; cursor: pointer; }
