@@ -93,4 +93,18 @@ class ProdutoIntegrationTests {
                 .andExpect(status().isOk()).andExpect(header().string("Access-Control-Allow-Credentials", "true"));
         }
     }
+
+    @Test void aceitaImagemLocalERejeitaCaminhosForaDaPasta() throws Exception {
+        String local = PRODUTO.replace("https://example.com/produto.jpg", "/images/produtos/mouse-gamer.png");
+        mvc.perform(post("/api/produtos").with(user("admin").roles("ADMINISTRADOR")).with(csrf())
+            .contentType(MediaType.APPLICATION_JSON).content(local))
+            .andExpect(status().isCreated()).andExpect(jsonPath("imagem").value("/images/produtos/mouse-gamer.png"));
+        for (String caminho : new String[] {"/images/produtos/../senha.png", "//example.com/imagem.png", "/images/produtos/imagem.svg"}) {
+            mvc.perform(post("/api/produtos").with(user("admin").roles("ADMINISTRADOR")).with(csrf())
+                .contentType(MediaType.APPLICATION_JSON).content(PRODUTO.replace("https://example.com/produto.jpg", caminho)))
+                .andExpect(status().isBadRequest());
+        }
+        assertEquals(1, repository.count());
+    }
+
 }

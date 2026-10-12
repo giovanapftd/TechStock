@@ -54,8 +54,8 @@ function FormularioProduto({ produto }) {
         <textarea id="produto-descricao" name="descricao" required maxLength={1000} rows={4} placeholder="Descreva o produto" defaultValue={produto?.descricao ?? ""} />
         <label htmlFor="produto-categoria">Categoria</label>
         <select id="produto-categoria" name="categoria" required defaultValue={produto?.categoria ?? ""}><option value="" disabled>Selecione uma categoria</option>{["Periféricos", "Monitores", "Áudio", "Acessórios", "Componentes", "Sem categoria"].map((categoria) => <option key={categoria}>{categoria}</option>)}</select>
-        <label htmlFor="produto-imagem">URL da imagem (opcional)</label>
-        <input id="produto-imagem" name="imagem" type="url" pattern="https?://.*" maxLength={2048} placeholder="https://exemplo.com/produto.jpg" defaultValue={produto?.imagemOriginal ?? ""} />
+        <label htmlFor="produto-imagem">Endereço da imagem (opcional)</label>
+        <input id="produto-imagem" name="imagem" type="text" pattern="https?://.*|/images/produtos/[A-Za-z0-9_-]+[.](png|jpg|jpeg|webp)" maxLength={2048} placeholder="https://exemplo.com/produto.jpg ou /images/produtos/mouse-gamer.png" defaultValue={produto?.imagemOriginal ?? ""} />
         <div className="admin-formulario-linha">
           <div><label htmlFor="produto-preco">Preço (R$)</label><input id="produto-preco" name="preco" type="number" required min="0.01" max="999999999.99" step="0.01" placeholder="0,00" defaultValue={produto?.preco ?? ""} /></div>
           <div><label htmlFor="produto-quantidade">Quantidade em estoque</label><input id="produto-quantidade" name="quantidade" type="number" required min="0" max="2147483647" step="1" defaultValue={produto?.quantidade ?? 0} /></div>

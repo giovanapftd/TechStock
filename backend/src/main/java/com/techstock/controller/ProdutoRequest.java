@@ -11,7 +11,7 @@ public record ProdutoRequest(
     @NotNull @DecimalMin("0.01") @DecimalMax("999999999.99") @Digits(integer = 9, fraction = 2) BigDecimal preco,
     @NotNull @Min(0) Integer quantidade,
     @NotBlank @Pattern(regexp = "Periféricos|Monitores|Áudio|Acessórios|Componentes|Sem categoria") String categoria,
-    @Size(max = 2048) @Pattern(regexp = "^$|https?://[^\\s]+", message = "A imagem deve ser uma URL HTTP ou HTTPS") String imagem
+    @Size(max = 2048) @Pattern(regexp = "^$|https?://[^\\s]+|/images/produtos/[A-Za-z0-9_-]+\\.(png|jpg|jpeg|webp)", message = "Use uma URL HTTP/HTTPS ou uma imagem local em /images/produtos/") String imagem
 ) {
     public Produto toProduto() {
         Produto produto = new Produto(nome.strip(), descricao.strip(), preco, quantidade);
